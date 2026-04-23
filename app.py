@@ -1,55 +1,46 @@
-import os, json, subprocess
+import os
+import json
 from datetime import datetime
-
-def log_data(node_path, entry_name):
-    # Kurema folder yigenga bidasubirwaho
-    path = f"departments/{node_path}"
-    os.makedirs(path, exist_ok=True)
-    file_path = f"{path}/sovereign_records.json"
-    
-    records = []
-    if os.path.exists(file_path):
-        with open(file_path, 'r') as f:
-            try: records = json.load(f)
-            except: records = []
-            
-    records.append({"id": len(records)+1, "time": str(datetime.now()), "entry": entry_name})
-    with open(file_path, 'w') as f:
-        json.dump(records, f, indent=4)
-    print(f"\n[DONE] Saved to {node_path}")
 
 def main():
     while True:
         os.system('clear')
-        print('==================================================')
-        print('    BYV GLOBAL AI | CEO: BARTHÉLEMY')
-        print('    STATUS: LIVE | INDEPENDENT NODES ACTIVE')
-        print('==================================================')
-        print('1. AGRI (Agri_Node)      2. LIVE (Livestock_Node)')
-        print('3. FINANCE (Finance_Node) 4. HR (HR_Node)')
-        print('5. SALES (Sales_Node)    6. ART (Art_Node)')
-        print('7. MEDIA (Reports_Node)  9. GITHUB SYNC')
-        print('0. EXIT')
+        print("================================================")
+        print("    BYV GLOBAL AI | TREASURY: $456,199")
+        print("    CEO: BARTHÉLEMY | PROFESSIONAL MODE")
+        print("================================================")
+        print("1. SaaS (Software)       2. AI HR Management")
+        print("3. Creative & Art        4. Agriculture")
+        print("5. Finance               6. Logistics")
+        print("7. E-Commerce            8. Healthcare Tech")
+        print("9. Education             10. Telecom & IT")
+        print("11. Security             12. GITHUB SYNC (LIVE)")
+        print("0. EXIT")
+        print("------------------------------------------------")
         
-        ch = input('\nCEO, Select Node: ')
+        choice = input("\nCEO, Hitamo Ishami: ")
+        if choice == "0": break
         
         nodes = {
-            '1': "Agriculture_and_Livestock/Agri_Node",
-            '2': "Agriculture_and_Livestock/Livestock_Node",
-            '3': "Finance_and_AI_HR/Finance_Node",
-            '4': "Finance_and_AI_HR/HR_Node",
-            '5': "Commerce_and_Sales/Sales_Node",
-            '6': "Creative_and_Art/Art_Node",
-            '7': "Media_and_Reports/Reports_Node"
+            "1":"SaaS", "2":"AI_HR", "3":"Creative_Art", 
+            "4":"Agriculture", "5":"Finance", "6":"Logistics",
+            "7":"Commerce", "8":"Healthcare", "9":"Education",
+            "10":"Telecom", "11":"Security"
         }
         
-        if ch in nodes:
-            val = input(f"Andika Data ya {ch}: ")
-            log_data(nodes[ch], val)
-            input("\nPress Enter to continue...")
-        elif ch == '9':
-            os.system('git add . && git commit -m "SYNC" && git push -f origin main')
-            input("\nSynced to Cloud. Press Enter...")
-        elif ch == '0': break
+        if choice in nodes:
+            name = nodes[choice]
+            data = input(f"\nAndika raporo ya {name}: ")
+            record = {"time": str(datetime.now()), "report": data}
+            with open(f"{name}.json", "a") as f:
+                f.write(json.dumps(record) + "\n")
+            print(f"\n✅ {name} Data Saved Locally!")
+            input("\nKanda Enter...")
+        elif choice == "12":
+            print("\n🚀 Irimo gusukura no kohereza kuri GitHub...")
+            # Iki gice kigamije gusiba bya bindi bya kera no kuri GitHub
+            os.system("git rm -r --cached . && git add . && git commit -m 'Force Clean Sync' && git push -f origin main")
+            input("\nSync Yarangiye! Kanda Enter...")
 
-if __name__ == '__main__': main()
+if __name__ == "__main__":
+    main()
